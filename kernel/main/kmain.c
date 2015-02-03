@@ -218,7 +218,7 @@ idleproc_run(int arg1, void *arg2)
 static kthread_t *
 initproc_create(void)
 {
-        //NOT_YET_IMPLEMENTED("PROCS: initproc_create");
+    //NOT_YET_IMPLEMENTED("PROCS: initproc_create");
     proc = proc_create()
         return NULL;
 }

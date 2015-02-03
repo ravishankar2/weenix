@@ -82,19 +82,19 @@ failed:
 proc_t *
 proc_create(char *name)
 {
-    proc_t proc = slab_obj_alloc( proc_allocator );
+    proc_t * proc = slab_obj_alloc( proc_allocator );
     KASSERT(proc != NULL);
     proc->p_state = PROC_RUNNING;
     proc->p_pid = _proc_getid();
     if(proc->p_pid==PID_INIT) proc_initproc = proc;
-    p_comm[PROC_NAME_LEN] = name;
+    //p_comm[PROC_NAME_LEN] = name;
     memcpy(proc->p_comm, name, PROC_NAME_LEN);
-    if(proc->p_pid!=PID_INIT) {
+    if(proc->p_pid!=PID_IDLE) {
         proc->p_pproc = curproc;
     }else {
         curproc = proc;
     } 
-    //pagedir_t      *p_pagedir;
+    proc->p_pagedir = pt_get();
     return proc;
         //NOT_YET_IMPLEMENTED("PROCS: proc_create");
        // return NULL;
