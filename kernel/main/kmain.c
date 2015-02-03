@@ -123,11 +123,15 @@ bootstrap(int arg1, void *arg2)
 {
         /* necessary to finalize page table information */
         pt_template_init();
-
-        NOT_YET_IMPLEMENTED("PROCS: bootstrap");
-
-        panic("weenix returned to bootstrap()!!! BAD!!!\n");
-        return NULL;
+    proc_t idle_proc = proc_create("idle");
+    KASSERT( idle_proc->p_pid == PID_IDLE );
+    curproc = idle_proc;
+    context_t idleproc_run_context;
+    void *bstack = page_alloc();
+    context_setup( &idleproc_run_context, idleproc_run, 0, NULL, bstack, PAGE_SIZE, idle_proc->p_pagedir );
+    context_make_active( &idleproc_run_context );
+    panic("weenix returned to bootstrap()!!! BAD!!!\n");
+    return NULL;
 }
 
 /**
@@ -145,6 +149,7 @@ bootstrap(int arg1, void *arg2)
 static void *
 idleproc_run(int arg1, void *arg2)
 {
+        KASSERT(1!=0);
         int status;
         pid_t child;
 
@@ -213,7 +218,8 @@ idleproc_run(int arg1, void *arg2)
 static kthread_t *
 initproc_create(void)
 {
-        NOT_YET_IMPLEMENTED("PROCS: initproc_create");
+        //NOT_YET_IMPLEMENTED("PROCS: initproc_create");
+    proc = proc_create()
         return NULL;
 }
 
