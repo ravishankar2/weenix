@@ -87,7 +87,6 @@ proc_create(char *name)
     proc->p_state = PROC_RUNNING;
     proc->p_pid = _proc_getid();
     if(proc->p_pid==PID_INIT) proc_initproc = proc;
-    //p_comm[PROC_NAME_LEN] = name;
     memcpy(proc->p_comm, name, PROC_NAME_LEN);
     if(proc->p_pid!=PID_IDLE) {
         proc->p_pproc = curproc;
@@ -96,8 +95,6 @@ proc_create(char *name)
     } 
     proc->p_pagedir = pt_get();
     return proc;
-        //NOT_YET_IMPLEMENTED("PROCS: proc_create");
-       // return NULL;
 }
 
 /**
