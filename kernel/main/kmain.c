@@ -149,7 +149,7 @@ bootstrap(int arg1, void *arg2)
 static void *
 idleproc_run(int arg1, void *arg2)
 {
-        KASSERT(1!=0);
+        KASSERT(1==0);
         int status;
         pid_t child;
 
@@ -219,7 +219,7 @@ static kthread_t *
 initproc_create(void)
 {
     //NOT_YET_IMPLEMENTED("PROCS: initproc_create");
-    proc = proc_create()
+    //proc = proc_create();
         return NULL;
 }
 
