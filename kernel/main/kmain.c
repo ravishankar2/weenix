@@ -123,7 +123,7 @@ bootstrap(int arg1, void *arg2)
 {
         /* necessary to finalize page table information */
         pt_template_init();
-    proc_t idle_proc = proc_create("idle");
+    proc_t* idle_proc = proc_create("idle");
     KASSERT( idle_proc->p_pid == PID_IDLE );
     curproc = idle_proc;
     context_t idleproc_run_context;
